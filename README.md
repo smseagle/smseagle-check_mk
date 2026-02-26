@@ -17,6 +17,7 @@ Bash script for **Checkmk 2.x** using **SMSEagle APIv2**.
 3. Create a new user (or use an existing one)
 4. Edit **Access to API** for the user - Enable APIv2, generate an access token and enable permission for SMS sending
 5. Copy the token - you will need it for Checkmk configuration
+6. Open the menu Settings > SSL page. Set Forward HTTP to HTTPS to “No”.
 
 ### Checkmk Installation
 
