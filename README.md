@@ -15,7 +15,7 @@ Bash script for **Checkmk 2.x** using **SMSEagle APIv2**.
 1. Log in to the SMSEagle web GUI
 2. Go to **Users** menu
 3. Create a new user (or use an existing one)
-4. Edit **Access to API** for the user - Generate an access token and enable permission for SMS sending
+4. Edit **Access to API** for the user - Enable APIv2, generate an access token and enable permission for SMS sending
 5. Copy the token - you will need it for Checkmk configuration
 
 ### Checkmk Installation
