@@ -1,14 +1,10 @@
 #!/bin/bash
-# Push Notification (using SMSEagle)
+# SMSEagle
 #
 # Script Name   : check_mk_smseagle-notify.sh
-# Description   : Send CheckMK notifications via SMSEagle device (APIv2)
-# Version       : 2.0
-# Date          : 2026-02-16
+# Description   : Send Checkmk notifications via SMSEagle device (APIv2)
 # Author        : SMSEagle Team
 # ======================================================================================
-
-# --- Read parameters from Custom User Attributes or fallback to notification rule parameters ---
 
 # SMSEAGLE_URL - base URL of the SMSEagle device (e.g. https://192.168.0.100)
 if [[ -n "${NOTIFY_CONTACT_SMSEAGLE_URL}" ]]; then
@@ -39,7 +35,7 @@ if [[ -n "${NOTIFY_CONTACTPAGER}" ]]; then
     PHONE_NUMBER="${NOTIFY_CONTACTPAGER}"
     echo "DEBUG: PHONE_NUMBER set from NOTIFY_CONTACTPAGER: ${PHONE_NUMBER}" >&2
 else
-    echo "ERROR: No phone number. Set the Pager field on the CheckMK contact. Exiting." >&2
+    echo "ERROR: No phone number. Set the Pager field on the Checkmk contact. Exiting." >&2
     exit 2
 fi
 
@@ -139,7 +135,7 @@ echo "DEBUG: Message: ${MESSAGE}" >&2
 
 # --- Build JSON payload ---
 
-# Escape special characters for JSON (pure bash, no python dependency)
+# Escape special characters for JSON
 json_escape() {
     local str="$1"
     str="${str//\\/\\\\}"
@@ -168,7 +164,7 @@ fi
 
 JSON_PAYLOAD+="}"
 
-# --- Send SMS via SMSEagle API v2 ---
+# --- Send SMS via SMSEagle APIv2 ---
 
 ENDPOINT="${SMSEAGLE_URL%/}/api/v2/messages/sms"
 echo "DEBUG: Sending to endpoint: ${ENDPOINT}" >&2
@@ -195,7 +191,7 @@ if [[ "${http_code}" -ge 200 && "${http_code}" -lt 300 ]]; then
         echo "SMSEagle: SMS sent successfully to ${PHONE_NUMBER}" >&2
         exit 0
     else
-        echo "ERROR: Unexpected API response: ${body}" >&2
+        echo "ERROR: ${body}" >&2
         exit 2
     fi
 else
